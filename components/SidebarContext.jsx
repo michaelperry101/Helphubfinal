@@ -1,18 +1,33 @@
+// components/SidebarContext.jsx
 "use client";
-import { createContext, useContext, useState, useCallback } from "react";
 
-const Ctx = createContext(null);
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 
-export function SidebarProvider({ children }) {
-  const [open, setOpen] = useState(false);
-  const toggle = useCallback(() => setOpen(v => !v), []);
-  const close = useCallback(() => setOpen(false), []);
-  const value = { open, toggle, close, setOpen };
-  return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
+const SidebarContext = createContext(null);
+
+export function useSidebar() {
+  const ctx = useContext(SidebarContext);
+  if (!ctx) throw new Error("useSidebar must be used within SidebarProvider");
+  return ctx;
 }
 
-export function useSidebar(){
-  const ctx = useContext(Ctx);
-  if(!ctx) throw new Error("useSidebar must be used within SidebarProvider");
-  return ctx;
+export default function SidebarProvider({ children }) {
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    document.body.classList.toggle("sidebar-open", open);
+  }, [open]);
+
+  const value = useMemo(
+    () => ({
+      open,
+      toggle: () => setOpen((v) => !v),
+      close: () => setOpen(false),
+      openSidebar: () => setOpen(true),
+      setOpen,
+    }),
+    [open]
+  );
+
+  return <SidebarContext.Provider value={value}>{children}</SidebarContext.Provider>;
 }
