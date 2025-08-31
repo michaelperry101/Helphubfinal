@@ -1,29 +1,48 @@
+// components/Header.jsx
 "use client";
 import Link from "next/link";
-import Image from "next/image";
-import { useSidebar } from "./SidebarContext";
-import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 
-export default function Header(){
-  const { open, toggle } = useSidebar();
-  const pathname = usePathname();
+export default function Header() {
+  // Minimal toggle using a custom event. Your Sidebar listens for this.
+  useEffect(() => {
+    const btn = document.querySelector("[data-toggle-sidebar]");
+    if (!btn) return;
+    const onClick = () => window.dispatchEvent(new CustomEvent("toggle-sidebar"));
+    btn.addEventListener("click", onClick);
+    return () => btn.removeEventListener("click", onClick);
+  }, []);
 
   return (
     <header className="header">
-      <div className="container header-inner">
+      <div className="header-inner">
+        {/* Hamburger (left) */}
         <button
-          aria-label="Menu"
-          className={`hamburger ${open ? "active":""}`}
-          onClick={toggle}
+          className="hamburger"
+          type="button"
+          aria-label="Toggle menu"
+          data-toggle-sidebar
         >
-          <span className="bars">
-            <span></span><span></span><span></span>
-          </span>
+          <span className="bar" />
+          <span className="bar" />
+          <span className="bar" />
         </button>
 
-        <Link href="/" className="logo-link" aria-label="Go home">
-          <Image src="/logo.png" alt="HelpHub247" width={140} height={42} priority />
+        {/* Centered logo (clicking goes Home) */}
+        <Link href="/" className="logo-link" aria-label="HelpHub Home">
+          {/* IMPORTANT: ensure /public/helphub-logo.png exists */}
+          <img
+            src="/helphub-logo.png"
+            alt="HelpHub247"
+            width="200"
+            height="60"
+            className="logo-img"
+            loading="eager"
+          />
         </Link>
+
+        {/* Right spacer so center stays true */}
+        <div className="right-slot" aria-hidden />
       </div>
     </header>
   );
