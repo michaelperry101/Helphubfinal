@@ -22,7 +22,7 @@ export default function Header(){
         </button>
 
         <Link href="/" className="logo-link" aria-label="Go home">
-          <Image src="/logo-small.png" alt="HelpHub247" width={140} height={42} priority />
+          <Image src="/logo.png" alt="HelpHub247" width={140} height={42} priority />
         </Link>
       </div>
     </header>
