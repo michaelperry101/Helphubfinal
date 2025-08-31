@@ -1,12 +1,9 @@
 // app/layout.js
 import "./globals.css";
-import Script from "next/script";
-
-// ⬇️ Use RELATIVE imports (no "@/")
-import Header from "../components/Header";
-import Sidebar from "../components/Sidebar";
-import { SidebarProvider } from "../components/SidebarContext";
-import { ThemeProvider } from "../components/ThemeProvider";
+import Header from "../components/Header.jsx";
+import Sidebar from "../components/Sidebar.jsx";
+import { SidebarProvider } from "../components/SidebarContext.jsx";
+import { ThemeProvider } from "../components/ThemeProvider.jsx";
 
 export const metadata = {
   title: "HelpHub247",
@@ -16,19 +13,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        {/* Prevent theme flash before hydration */}
-        <Script id="set-theme" strategy="beforeInteractive">
-          {`
-            try {
-              var t = localStorage.getItem('hh_theme') || 'light';
-              document.documentElement.dataset.theme = t;
-            } catch (e) {}
-          `}
-        </Script>
-      </head>
+      <head />
       <body>
-        <ThemeProvider>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <SidebarProvider>
             <Header />
             <Sidebar />
