@@ -9,31 +9,38 @@ export const metadata = {
   title: "HelpHub — Carys",
   description: "Your AI assistant, powered by Carys.",
   icons: {
-    icon: "/helphub-logo.png",   // 👈 switched to PNG
-    shortcut: "/helphub-logo.png",
-    apple: "/helphub-logo.png",
+    icon: [
+      { url: "/favicon.png", type: "image/png", sizes: "32x32" },
+      { url: "/favicon.png", type: "image/png", sizes: "192x192" },
+    ],
+    apple: "/apple-touch-icon.png",
+    shortcut: "/favicon.png",
   },
   openGraph: {
     title: "HelpHub — Carys",
     description: "Your AI assistant, powered by Carys.",
-    images: ["logo.png"],  // 👈 OG image in PNG
+    images: ["/helphub-logo.png"],
   },
+  manifest: "/manifest.webmanifest",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        {/* Hard fallbacks in case metadata is cached oddly */}
+        <link rel="icon" href="/favicon.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <meta name="theme-color" content="#0ea5e9" />
+      </head>
       <body>
         <ThemeProvider>
           <SidebarProvider>
-            <div className="flex min-h-screen bg-gray-50 text-gray-900">
-              {/* Sidebar */}
+            <div className="app-shell">
               <Sidebar />
-
-              {/* Main content */}
-              <div className="flex-1 flex flex-col">
+              <div className="app-main">
                 <Header />
-                <main className="flex-1 p-4">{children}</main>
+                <main className="app-content">{children}</main>
               </div>
             </div>
           </SidebarProvider>
