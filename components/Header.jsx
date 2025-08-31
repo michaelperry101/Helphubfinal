@@ -32,7 +32,7 @@ export default function Header() {
         <Link href="/" className="logo-link" aria-label="HelpHub Home">
           {/* IMPORTANT: ensure /public/helphub-logo.png exists */}
           <img
-            src="/helphub-logo.png"
+            src="/logo.png"
             alt="HelpHub247"
             width="200"
             height="60"
