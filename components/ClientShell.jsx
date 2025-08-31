@@ -1,26 +1,23 @@
 // components/ClientShell.jsx
 "use client";
 
-import { useEffect } from "react";
 import SidebarProvider from "./SidebarContext";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
+import { useEffect } from "react";
 
-export default function ClientShell({ children }) {
-  // SidebarProvider will manage the open/close state via context
+export default function ClientShell() {
+  // Ensure body class is correct on mount (no flash)
   useEffect(() => {
-    // clean up body class if needed on unmount
-    return () => document.body.classList.remove("sidebar-open");
+    document.body.classList.add("js-mounted");
   }, []);
 
   return (
     <SidebarProvider>
-      <div className="app-shell">
-        <Header />
-        <Sidebar />
-        <main className="app-content">{children}</main>
-        {/* Scrim rendered by Sidebar component via portal OR inline if you prefer */}
-      </div>
+      <Header />
+      <Sidebar />
+      {/* Content spacer so pages aren’t under the fixed header */}
+      <div className="app-content-spacer" />
     </SidebarProvider>
   );
 }
