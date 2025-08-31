@@ -1,4 +1,4 @@
-// app/page.jsx
+// app/page.js
 export default function HomePage() {
   return (
     <main className="container">
