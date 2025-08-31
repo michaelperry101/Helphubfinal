@@ -234,3 +234,7 @@ a{color:inherit;text-decoration:none}
 .chip:hover { background: #eef2ff; border-color: #dbe2ff; }
 .chip.active { background: #e8efff; border-color: #c7d6ff; }
 .chip .icon { font-size: 16px; }
+.header { position: sticky; top: 0; height: 64px; display:flex; align-items:center; justify-content:center; }
+.hamburger { position:absolute; left:12px; top:50%; transform:translateY(-50%); background:transparent; border:0; }
+.logo-link { display:inline-flex; align-items:center; justify-content:center; }
+.logo-img { display:block; height:auto; max-height:44px; width:auto; }
