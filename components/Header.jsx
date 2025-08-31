@@ -1,49 +1,34 @@
 // components/Header.jsx
 "use client";
+
 import Link from "next/link";
-import { useEffect } from "react";
+import Image from "next/image";
+import { useSidebar } from "./SidebarContext";
 
 export default function Header() {
-  // Minimal toggle using a custom event. Your Sidebar listens for this.
-  useEffect(() => {
-    const btn = document.querySelector("[data-toggle-sidebar]");
-    if (!btn) return;
-    const onClick = () => window.dispatchEvent(new CustomEvent("toggle-sidebar"));
-    btn.addEventListener("click", onClick);
-    return () => btn.removeEventListener("click", onClick);
-  }, []);
+  const { open, toggle } = useSidebar();
 
   return (
-    <header className="header">
-      <div className="header-inner">
-        {/* Hamburger (left) */}
-        <button
-          className="hamburger"
-          type="button"
-          aria-label="Toggle menu"
-          data-toggle-sidebar
-        >
-          <span className="bar" />
-          <span className="bar" />
-          <span className="bar" />
-        </button>
+    <header className="app-header">
+      {/* Animated hamburger top-left (no box) */}
+      <button
+        aria-label="Toggle menu"
+        className={`hamburger ${open ? "is-active" : ""}`}
+        onClick={toggle}
+      >
+        <span />
+        <span />
+        <span />
+      </button>
 
-        {/* Centered logo (clicking goes Home) */}
-        <Link href="/" className="logo-link" aria-label="HelpHub Home">
-          {/* IMPORTANT: ensure /public/helphub-logo.png exists */}
-          <img
-            src="/logo.png"
-            alt="HelpHub247"
-            width="200"
-            height="60"
-            className="logo-img"
-            loading="eager"
-          />
-        </Link>
+      {/* Centered logo that goes home */}
+      <Link href="/" className="logo-link" aria-label="HelpHub247 home">
+        {/* Put /public/logo.png in your repo */}
+        <Image src="/logo.png" width={152} height={40} alt="HelpHub247" priority />
+      </Link>
 
-        {/* Right spacer so center stays true */}
-        <div className="right-slot" aria-hidden />
-      </div>
+      {/* Right-side spacer for symmetry; add icons later if needed */}
+      <div className="header-right" />
     </header>
   );
 }
