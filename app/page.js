@@ -1,28 +1,41 @@
-import Link from "next/link";
-import Image from "next/image";
-
-export default function HomePage(){
+// app/page.jsx
+export default function HomePage() {
   return (
-    <div className="page">
-      <section className="hero">
-        <div className="center-stack">
-          <div className="logo-center"><Image src="/logo.png" width={120} height={120} alt="HelpHub247" priority/></div>
-          <h1>Meet Carys — your always‑on AI partner</h1>
-          <p>Chat in text or voice. Create, plan, and get answers fast.</p>
-          <div className="cta-row">
-            <Link href="/chat" className="btn primary">Open Chat</Link>
-            <Link href="/about" className="btn">About Carys</Link>
-          </div>
-        </div>
+    <main className="container">
+      <section className="center" style={{ marginTop: 40 }}>
+        <img
+          src="/logo.png"
+          alt="HelpHub247"
+          width="220"
+          height="58"
+          style={{ height: "auto" }}
+        />
+        <h1 style={{ marginTop: 14, marginBottom: 8 }}>Welcome to HelpHub247</h1>
+        <p style={{ color: "var(--muted)", marginBottom: 24 }}>
+          Your AI assistant, Carys — always ready to help.
+        </p>
+
+        <a
+          href="/chat"
+          className="menu-item"
+          style={{
+            display: "inline-grid",
+            gridTemplateColumns: "36px 1fr",
+            alignItems: "center",
+            gap: 10,
+            padding: "12px 18px",
+            color: "#fff",
+            background:
+              "linear-gradient(180deg, rgba(59,130,246,.9), rgba(37,99,235,.9))",
+            border: "1px solid rgba(59,130,246,.45)",
+            borderRadius: 14,
+            textDecoration: "none",
+          }}
+        >
+          <span className="mi-ic" aria-hidden>💬</span>
+          <span className="mi-label">Chat now</span>
+        </a>
       </section>
-
-      <footer className="footer">
-        © {new Date().getFullYear()} HelpHub247 • <Link href="/privacy">Privacy</Link> • <Link href="/terms">Terms</Link>
-      </footer>
-
-      <Link href="/chat" className="sticky-chat-bubble" aria-label="Chat with Carys">
-        <span className="dot" /> Chat with Carys
-      </Link>
-    </div>
+    </main>
   );
 }
