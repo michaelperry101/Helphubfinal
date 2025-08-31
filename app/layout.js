@@ -16,7 +16,7 @@ export const metadata = {
   openGraph: {
     title: "HelpHub — Carys",
     description: "Your AI assistant, powered by Carys.",
-    images: ["/helphub-logo.png"],  // 👈 OG image in PNG
+    images: ["logo.png"],  // 👈 OG image in PNG
   },
 };
 
