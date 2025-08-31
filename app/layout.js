@@ -1,25 +1,41 @@
 // app/layout.js
 import "./globals.css";
-import Header from "../components/Header.jsx";
-import Sidebar from "../components/Sidebar.jsx";
-import { SidebarProvider } from "../components/SidebarContext.jsx";
-import { ThemeProvider } from "../components/ThemeProvider.jsx";
+import Header from "@/components/Header";
+import Sidebar from "@/components/Sidebar";
+import { SidebarProvider } from "@/components/SidebarContext";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 export const metadata = {
-  title: "HelpHub247",
-  description: "Your AI-powered assistant",
+  title: "HelpHub — Carys",
+  description: "Your AI assistant, powered by Carys.",
+  icons: {
+    icon: "/helphub-logo.png",   // 👈 switched to PNG
+    shortcut: "/helphub-logo.png",
+    apple: "/helphub-logo.png",
+  },
+  openGraph: {
+    title: "HelpHub — Carys",
+    description: "Your AI assistant, powered by Carys.",
+    images: ["/helphub-logo.png"],  // 👈 OG image in PNG
+  },
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head />
+    <html lang="en">
       <body>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+        <ThemeProvider>
           <SidebarProvider>
-            <Header />
-            <Sidebar />
-            <main className="app-content">{children}</main>
+            <div className="flex min-h-screen bg-gray-50 text-gray-900">
+              {/* Sidebar */}
+              <Sidebar />
+
+              {/* Main content */}
+              <div className="flex-1 flex flex-col">
+                <Header />
+                <main className="flex-1 p-4">{children}</main>
+              </div>
+            </div>
           </SidebarProvider>
         </ThemeProvider>
       </body>
