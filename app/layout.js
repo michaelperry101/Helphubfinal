@@ -1,50 +1,87 @@
 // app/layout.js
 import "./globals.css";
-import Header from "@/components/Header";
-import Sidebar from "@/components/Sidebar";
-import { SidebarProvider } from "@/components/SidebarContext";
-import { ThemeProvider } from "@/components/ThemeProvider";
+import { useState, useEffect } from "react";
 
 export const metadata = {
-  title: "HelpHub — Carys",
-  description: "Your AI assistant, powered by Carys.",
-  icons: {
-    icon: [
-      { url: "/favicon.png", type: "image/png", sizes: "32x32" },
-      { url: "/favicon.png", type: "image/png", sizes: "192x192" },
-    ],
-    apple: "/apple-touch-icon.png",
-    shortcut: "/favicon.png",
-  },
-  openGraph: {
-    title: "HelpHub — Carys",
-    description: "Your AI assistant, powered by Carys.",
-    images: ["/helphub-logo.png"],
-  },
-  manifest: "/manifest.webmanifest",
+  title: "HelpHub247",
+  description: "Chat with Carys",
 };
 
 export default function RootLayout({ children }) {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  useEffect(() => {
+    if (sidebarOpen) {
+      document.body.classList.add("sidebar-open");
+    } else {
+      document.body.classList.remove("sidebar-open");
+    }
+  }, [sidebarOpen]);
+
   return (
     <html lang="en">
-      <head>
-        {/* Hard fallbacks in case metadata is cached oddly */}
-        <link rel="icon" href="/favicon.png" type="image/png" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <meta name="theme-color" content="#0ea5e9" />
-      </head>
       <body>
-        <ThemeProvider>
-          <SidebarProvider>
-            <div className="app-shell">
-              <Sidebar />
-              <div className="app-main">
-                <Header />
-                <main className="app-content">{children}</main>
-              </div>
+        <div className="app-shell">
+          {/* Header */}
+          <header className="header">
+            <div className="header-inner">
+              <button
+                className="hamburger"
+                aria-label="Toggle sidebar"
+                onClick={() => setSidebarOpen(!sidebarOpen)}
+              >
+                <span className="bar"></span>
+                <span className="bar"></span>
+                <span className="bar"></span>
+              </button>
+              <a href="/" className="logo-link">
+                <img src="/logo.png" alt="HelpHub Logo" className="logo-img" />
+              </a>
             </div>
-          </SidebarProvider>
-        </ThemeProvider>
+          </header>
+
+          {/* Sidebar */}
+          <aside className={`sidebar ${sidebarOpen ? "open" : ""}`}>
+            <div className="brand">
+              <img src="/logo.png" alt="Logo" />
+              <span>HelpHub</span>
+            </div>
+            <ul className="menu">
+              <li>
+                <a href="/chat">
+                  <span className="icon">💬</span>
+                  <span className="label">Chat</span>
+                </a>
+              </li>
+              <li>
+                <a href="/about">
+                  <span className="icon">ℹ️</span>
+                  <span className="label">About</span>
+                </a>
+              </li>
+              <li>
+                <a href="/reviews">
+                  <span className="icon">⭐</span>
+                  <span className="label">Reviews</span>
+                </a>
+              </li>
+              <li>
+                <a href="/settings">
+                  <span className="icon">⚙️</span>
+                  <span className="label">Settings</span>
+                </a>
+              </li>
+            </ul>
+          </aside>
+
+          {/* Scrim (overlay) */}
+          {sidebarOpen && (
+            <div className="scrim show" onClick={() => setSidebarOpen(false)} />
+          )}
+
+          {/* Page content */}
+          <main className="app-content">{children}</main>
+        </div>
       </body>
     </html>
   );
