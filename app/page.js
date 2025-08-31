@@ -6,7 +6,7 @@ export default function HomePage(){
     <div className="page">
       <section className="hero">
         <div className="center-stack">
-          <div className="logo-center"><Image src="/logo-mark.svg" width={120} height={120} alt="HelpHub247" priority/></div>
+          <div className="logo-center"><Image src="/logo.png" width={120} height={120} alt="HelpHub247" priority/></div>
           <h1>Meet Carys — your always‑on AI partner</h1>
           <p>Chat in text or voice. Create, plan, and get answers fast.</p>
           <div className="cta-row">
