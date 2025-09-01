@@ -1,7 +1,17 @@
-export const metadata = { title: "Privacy Policy" };
-export default function Page(){
-  return (<div className="page container">
-    <h1>Privacy Policy</h1>
-    <div className="card section"><p>We store preferences in your browser. Audio/text may be sent to third-party AI providers when you start a chat.</p></div>
-  </div>);
+import ClientShell from "../../components/ClientShell";
+
+export const metadata = { title: "Privacy" };
+
+export default function PrivacyPage() {
+  return (
+    <ClientShell>
+      <main className="container">
+        <div className="card">
+          <h2>Privacy Policy</h2>
+          <p>We respect your privacy. Conversations can be deleted at any time. We don’t sell personal data.</p>
+          <p>Voice features are provided via ElevenLabs; their processing is governed by their policy.</p>
+        </div>
+      </main>
+    </ClientShell>
+  );
 }
