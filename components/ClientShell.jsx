@@ -1,23 +1,14 @@
-// components/ClientShell.jsx
 "use client";
-
 import SidebarProvider from "./SidebarContext";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
-import { useEffect } from "react";
 
-export default function ClientShell() {
-  // Ensure body class is correct on mount (no flash)
-  useEffect(() => {
-    document.body.classList.add("js-mounted");
-  }, []);
-
+export default function ClientShell({ children }) {
   return (
     <SidebarProvider>
       <Header />
       <Sidebar />
-      {/* Content spacer so pages aren’t under the fixed header */}
-      <div className="app-content-spacer" />
+      <div className="app-shell">{children}</div>
     </SidebarProvider>
   );
 }
