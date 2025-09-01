@@ -1,41 +1,36 @@
-// app/page.js
+import Link from "next/link";
+import Image from "next/image";
+import ClientShell from "../components/ClientShell";
+
+export const metadata = { title: "HelpHub247 — Home" };
+
 export default function HomePage() {
   return (
-    <main className="container">
-      <section className="center" style={{ marginTop: 40 }}>
-        <img
-          src="/logo.png"
-          alt="HelpHub247"
-          width="220"
-          height="58"
-          style={{ height: "auto" }}
-        />
-        <h1 style={{ marginTop: 14, marginBottom: 8 }}>Welcome to HelpHub247</h1>
-        <p style={{ color: "var(--muted)", marginBottom: 24 }}>
-          Your AI assistant, Carys — always ready to help.
-        </p>
+    <ClientShell>
+      <main className="container">
+        <section className="hero">
+          <div className="hero-card">
+            <div style={{display:"grid",gridTemplateColumns:"auto 1fr",gap:12,alignItems:"center"}}>
+              <Image src="/logo.png" width={40} height={40} alt="Logo" className="logo"/>
+              <div>
+                <h1 className="hero-title">Meet Carys — your helpful AI</h1>
+                <p className="hero-sub">
+                  Ask questions, plan, create, and talk — now with natural voice via ElevenLabs.
+                </p>
+              </div>
+            </div>
 
-        <a
-          href="/chat"
-          className="menu-item"
-          style={{
-            display: "inline-grid",
-            gridTemplateColumns: "36px 1fr",
-            alignItems: "center",
-            gap: 10,
-            padding: "12px 18px",
-            color: "#fff",
-            background:
-              "linear-gradient(180deg, rgba(59,130,246,.9), rgba(37,99,235,.9))",
-            border: "1px solid rgba(59,130,246,.45)",
-            borderRadius: 14,
-            textDecoration: "none",
-          }}
-        >
-          <span className="mi-ic" aria-hidden>💬</span>
-          <span className="mi-label">Chat now</span>
-        </a>
-      </section>
-    </main>
+            <div className="hero-actions">
+              <Link className="btn btn-primary" href="/chat">Start chatting</Link>
+              <Link className="btn" href="/about">Learn more</Link>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <Link href="/chat" className="chat-fab" aria-label="Chat with Carys">
+        💬 Chat with Carys
+      </Link>
+    </ClientShell>
   );
 }
