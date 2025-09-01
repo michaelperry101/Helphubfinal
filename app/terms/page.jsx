@@ -1,7 +1,16 @@
-export const metadata = { title: "Terms of Service" };
-export default function Page(){
-  return (<div className="page container">
-    <h1>Terms of Service</h1>
-    <div className="card section"><p>Use HelpHub247 responsibly. Voice and text interactions may be processed to provide the service. See Privacy for details.</p></div>
-  </div>);
+import ClientShell from "../../components/ClientShell";
+
+export const metadata = { title: "Terms" };
+
+export default function TermsPage() {
+  return (
+    <ClientShell>
+      <main className="container">
+        <div className="card">
+          <h2>Terms of Service</h2>
+          <p>Use Carys responsibly. Don’t upload illegal content. No warranties; use at your own risk.</p>
+        </div>
+      </main>
+    </ClientShell>
+  );
 }
