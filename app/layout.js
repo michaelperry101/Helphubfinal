@@ -1,28 +1,27 @@
-// app/layout.js (SERVER)
+// app/layout.js
 import "./globals.css";
-import ThemeProvider from "@/components/ThemeProvider";
-import { SidebarProvider } from "@/components/SidebarContext";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
+import Providers from "@/components/Providers";
 
 export const metadata = {
   title: "HelpHub247",
-  description: "Chat with Carys — your helpful assistant",
-  icons: { icon: "/favicon.ico" },
+  description: "Your helpful hub.",
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      {/* Start in light theme via class; next-themes will manage later */}
-      <body className="bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100">
-        <ThemeProvider>
-          <SidebarProvider>
-            <Header />
+    <html lang="en">
+      <body className="min-h-screen bg-white text-gray-900">
+        <Providers>
+          <div className="flex">
             <Sidebar />
-            {children}
-          </SidebarProvider>
-        </ThemeProvider>
+            <div className="flex-1 min-h-screen flex flex-col">
+              <Header />
+              <main className="p-4">{children}</main>
+            </div>
+          </div>
+        </Providers>
       </body>
     </html>
   );
