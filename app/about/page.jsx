@@ -1,23 +1,22 @@
+import ClientShell from "../../components/ClientShell";
+
 export const metadata = { title: "About Carys" };
 
-export default function AboutPage(){
+export default function AboutPage() {
   return (
-    <div className="page container">
-      <h1>About Carys</h1>
-      <div className="card section">
-        <h2>What makes Carys tick</h2>
-        <p>
-          Carys blends fast reasoning with a natural British voice to help you draft, plan, and decide.
-          Ask for research, summaries, content, or spark ideas by talking—hands‑free.
-        </p>
-      </div>
-      <div className="card section">
-        <h2>Why HelpHub247</h2>
-        <p>
-          We believe assistance should feel effortless and private. Your preferences
-          (like theme, voice, and mute) are stored locally unless you sign in.
-        </p>
-      </div>
-    </div>
+    <ClientShell>
+      <main className="container">
+        <div className="card">
+          <h2>About Carys</h2>
+          <p>
+            Carys is your round-the-clock AI copilot. She plans, researches, drafts and speaks
+            with a warm, natural voice powered by ElevenLabs.
+          </p>
+          <p>
+            Highlights: fast answers, memory for context, clear sources (when needed), and a friendly tone.
+          </p>
+        </div>
+      </main>
+    </ClientShell>
   );
 }
