@@ -1,23 +1,27 @@
-import { REVIEWS } from "@/data/reviews";
+import ClientShell from "../../components/ClientShell";
 
-export const metadata = { title: "User Reviews" };
+export const metadata = { title: "Reviews" };
 
-export default function ReviewsPage(){
+const FAKE = [
+  { name: "Amelia R.", text: "Carys planned my trip in minutes. Unreal.", stars: 5 },
+  { name: "Lewis D.", text: "Voice chat feels like a real assistant.", stars: 5 },
+  { name: "Priya K.", text: "Clean UI and great summaries.", stars: 4 },
+];
+
+export default function ReviewsPage() {
   return (
-    <div className="page container">
-      <h1>User Reviews</h1>
-      <div className="reviews-grid">
-        {REVIEWS.map((r, idx)=> (
-          <article key={idx} className="card review">
-            <div className="avatar">{r.name.split(" ")[0][0]}</div>
-            <div>
-              <div className="name">{r.name} • {"⭐".repeat(r.rating)}</div>
-              <div className="meta">{r.date}</div>
-              <p style={{marginTop:6}}>{r.text}</p>
+    <ClientShell>
+      <main className="container">
+        <div className="grid-2">
+          {FAKE.map((r, i) => (
+            <div key={i} className="card">
+              <div style={{fontWeight:700}}>{r.name}</div>
+              <div style={{color:"#fbbf24", margin:"6px 0"}}>{"★".repeat(r.stars)}{"☆".repeat(5-r.stars)}</div>
+              <p style={{margin:0}}>{r.text}</p>
             </div>
-          </article>
-        ))}
-      </div>
-    </div>
+          ))}
+        </div>
+      </main>
+    </ClientShell>
   );
 }
